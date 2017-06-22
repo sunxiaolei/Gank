@@ -3,22 +3,36 @@
 
     <data>
 
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
+
         <variable
-            name="test"
-            type="xiaolei.todayheadline.model.TestEntity"/>
+            name="vm"
+            type="xiaolei.todayheadline.vm.TestViewModel" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_request"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="request" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher_round"
+            android:visibility="@{vm.showImg?View.VISIBLE:View.GONE}" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{test.strTest}"
-            android:visibility="@{test.isVisible?View.VISIBLE:View.GONE}"/>
+            android:layout_marginTop="20dp"
+            android:text="@{vm.content}" />
+
     </LinearLayout>
 </layout>
