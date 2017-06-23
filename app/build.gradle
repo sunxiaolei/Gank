@@ -53,5 +53,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.0'
     //Common utils
     compile 'com.github.sunxiaolei:my-utils:1.0.5'
+    //Swipeback
+    compile 'com.github.sunxiaolei:swipeback:1.0.0'
 
 }

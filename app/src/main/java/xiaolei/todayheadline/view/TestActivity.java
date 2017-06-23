@@ -6,22 +6,23 @@ import android.os.Bundle;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import xiaolei.todayheadline.R;
+import xiaolei.todayheadline.base.BaseActivity;
+import xiaolei.todayheadline.base.BaseSwipeActivity;
 import xiaolei.todayheadline.databinding.ActivityTestBinding;
 import xiaolei.todayheadline.vm.TestViewModel;
 
-public class TestActivity extends RxAppCompatActivity {
+public class TestActivity extends BaseSwipeActivity<ActivityTestBinding> {
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        init();
+    protected int setContentViewId() {
+        return R.layout.activity_test;
     }
 
-    private void init(){
-        ActivityTestBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_test);
+    @Override
+    protected void init() {
         TestViewModel vm = new TestViewModel();
-        binding.setVm(vm);
-        binding.btnRequest.setOnClickListener(v -> vm.requestData());
+        mBinding.setVm(vm);
+        mBinding.btnRequest.setOnClickListener(v -> vm.requestData());
     }
 }
