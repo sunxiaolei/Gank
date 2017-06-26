@@ -55,5 +55,7 @@ dependencies {
     compile 'com.github.sunxiaolei:my-utils:1.0.5'
     //Swipeback
     compile 'com.github.sunxiaolei:swipeback:1.0.0'
+    //Adapter
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.18'
 
 }

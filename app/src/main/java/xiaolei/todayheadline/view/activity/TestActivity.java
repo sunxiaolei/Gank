@@ -1,4 +1,4 @@
-package xiaolei.todayheadline.view;
+package xiaolei.todayheadline.view.activity;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
