@@ -20,7 +20,7 @@ public class NewsAdapter extends BaseQuickAdapter<NewsEntity, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder holder, NewsEntity dto) {
         SimpleDraweeView iv = holder.getView(R.id.iv_img);
-        iv.setImageURI(dto.getMedia_avatar_url());
+        iv.setImageURI(dto.getArticle_url());
         holder.setText(R.id.tv_title, dto.getTitle());
     }
 }
