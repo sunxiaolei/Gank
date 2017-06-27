@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="colorBtnSelector">#333333</color>
+
 
     <color name="colorTextGray">#969fb1</color>
     <color name="colorTextWhite">#FFFFFF</color>

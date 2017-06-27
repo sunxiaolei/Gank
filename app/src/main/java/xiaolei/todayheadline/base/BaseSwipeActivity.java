@@ -1,17 +1,21 @@
 package xiaolei.todayheadline.base;
 
+import android.content.pm.ActivityInfo;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.jakewharton.rxbinding2.view.RxView;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import sunxl8.library.swipeback.SwipeBackActivityBase;
 import sunxl8.library.swipeback.SwipeBackActivityHelper;
 import sunxl8.library.swipeback.SwipeBackLayout;
 import sunxl8.library.swipeback.Utils;
+import xiaolei.todayheadline.R;
 
 /**
  * Created by sunxl8 on 2017/6/23.
@@ -33,7 +37,19 @@ public abstract class BaseSwipeActivity<T extends ViewDataBinding> extends RxApp
         mHelper = new SwipeBackActivityHelper(this);
         mHelper.onActivityCreate();
         mBinding = DataBindingUtil.setContentView(this, setContentViewId());
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        initToolbar();
         init();
+    }
+
+    private void initToolbar() {
+        ImageView ivBack = (ImageView) findViewById(R.id.iv_back);
+        if (ivBack != null) {
+            RxView.clicks(ivBack)
+                    .subscribe(o -> {
+                        finish();
+                    });
+        }
     }
 
     @Override
