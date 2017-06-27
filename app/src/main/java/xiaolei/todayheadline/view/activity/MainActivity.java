@@ -43,6 +43,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
                     startActivity(new Intent(this, SettingActivity.class));
                 });
         mVm = new MainViewModel();
+        mBinding.setVm(mVm);
         mFragments = new ArrayList<>();
 
         for (int i = 0; i < mVm.titles.length; i++) {

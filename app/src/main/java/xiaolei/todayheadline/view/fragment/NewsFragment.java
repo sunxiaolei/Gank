@@ -39,6 +39,7 @@ public class NewsFragment extends BaseFragment<FragmentNewsBinding> {
         String type = getArguments().getString("type");
         mAdapter = new NewsAdapter();
         mVm = new NewsViewModel(mAdapter);
+        mBinding.setVm(mVm);
         mBinding.rvNews.setLayoutManager(new LinearLayoutManager(getActivity()));
         mBinding.rvNews.setAdapter(mAdapter);
 
