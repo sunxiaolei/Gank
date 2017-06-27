@@ -5,7 +5,7 @@
 
         <variable
             name="vm"
-            type="xiaolei.todayheadline.vm.NewsViewModel" />
+            type="xiaolei.todayheadline.vm.NewsViewModel"/>
     </data>
 
     <xiaolei.todayheadline.widget.StatusLayout
@@ -21,7 +21,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_news"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"/>
         </LinearLayout>
     </xiaolei.todayheadline.widget.StatusLayout>
 </layout>

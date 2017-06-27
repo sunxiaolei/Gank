@@ -16,9 +16,9 @@ import android.widget.TextView;
 
 public class StatusLayout extends FrameLayout {
 
-    public enum STATUS{NORMAL,ERROR,EMPTY,LOADING}
+    public enum STATUS {NORMAL, ERROR, EMPTY, LOADING}
 
-    private TextView tvError,tvLoading;
+    private TextView tvError, tvLoading;
 
     public StatusLayout(@NonNull Context context) {
         super(context);
@@ -28,6 +28,7 @@ public class StatusLayout extends FrameLayout {
         super(context, attrs);
         tvError = new TextView(getContext());
         tvError.setText("ERROR!!!");
+        tvError.setGravity(Gravity.CENTER);
         tvLoading = new TextView(getContext());
         tvLoading.setText("LOADING...");
         tvLoading.setGravity(Gravity.CENTER);
@@ -35,14 +36,13 @@ public class StatusLayout extends FrameLayout {
         addView(tvError);
     }
 
-
-    public void setStatus(STATUS status){
+    public void setStatus(STATUS status, String msg) {
         hideViews();
-        switch (status){
+        switch (status) {
             case EMPTY:
                 break;
             case ERROR:
-                showError();
+                showError(msg);
                 break;
             case LOADING:
                 showLoading();
@@ -53,31 +53,37 @@ public class StatusLayout extends FrameLayout {
         }
     }
 
-    private void hideViews(){
+
+    public void setStatus(STATUS status) {
+        setStatus(status, "");
+    }
+
+    private void hideViews() {
         for (int i = 0; i < getChildCount(); i++) {
             getChildAt(i).setVisibility(View.GONE);
         }
     }
 
-    private void showError(){
+    private void showError(String msg) {
         tvError.setVisibility(View.VISIBLE);
+        tvError.setText(msg);
     }
 
-    private void showLoading(){
+    private void showLoading() {
         tvLoading.setVisibility(View.VISIBLE);
     }
 
-    private void showNormal(){
+    private void showNormal() {
         for (int i = 0; i < getChildCount(); i++) {
-            if (isNormalView(getChildAt(i))){
+            if (isNormalView(getChildAt(i))) {
                 getChildAt(i).setVisibility(View.VISIBLE);
                 continue;
             }
         }
     }
 
-    private boolean isNormalView(View view){
-        if ((view != null&&tvError!=view)){
+    private boolean isNormalView(View view) {
+        if ((view != null && tvError != view)) {
             return true;
         }
         return false;
