@@ -18,6 +18,11 @@ public class NewsDto {
     private boolean has_more;
     private String message;
     private List<NewsEntity> data;
+    /**
+     * next : {"max_behot_time":1498763834}
+     */
+
+    private NextBean next;
 
     public boolean isHas_more() {
         return has_more;
@@ -43,4 +48,27 @@ public class NewsDto {
         this.data = data;
     }
 
+    public NextBean getNext() {
+        return next;
+    }
+
+    public void setNext(NextBean next) {
+        this.next = next;
+    }
+
+    public static class NextBean {
+        /**
+         * max_behot_time : 1498763834
+         */
+
+        private String max_behot_time;
+
+        public String getMax_behot_time() {
+            return max_behot_time;
+        }
+
+        public void setMax_behot_time(String max_behot_time) {
+            this.max_behot_time = max_behot_time;
+        }
+    }
 }

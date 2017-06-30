@@ -1,6 +1,7 @@
 package xiaolei.todayheadline.view.fragment;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 
 import xiaolei.todayheadline.R;
@@ -43,10 +44,10 @@ public class NewsFragment extends BaseFragment<FragmentNewsBinding> {
         mBinding.rvNews.setLayoutManager(new LinearLayoutManager(getActivity()));
         mBinding.rvNews.setAdapter(mAdapter);
 
-        mVm.requestData(type);
-        mBinding.layoutStatus.setStatus(StatusLayout.STATUS.LOADING);
+        mBinding.refreshNews.setOnRefreshListener(() -> mVm.refreshData(type));
 
         RxBus.getDefault().toDefaultFlowable(ViewStatusEvent.class, event -> {
+            mBinding.refreshNews.setRefreshing(false);
             switch (event.getStatus()) {
                 case ViewStatusEvent.STATUS_NORMAL:
                     mBinding.layoutStatus.setStatus(StatusLayout.STATUS.NORMAL);
@@ -62,6 +63,9 @@ public class NewsFragment extends BaseFragment<FragmentNewsBinding> {
                     break;
             }
         });
+
+        mVm.refreshData(type);
+        mBinding.layoutStatus.setStatus(StatusLayout.STATUS.LOADING);
     }
 
 }
