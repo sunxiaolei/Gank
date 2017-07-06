@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.getkeepsafe.dexcount'
 
 android {
     compileSdkVersion 25
@@ -66,5 +67,9 @@ dependencies {
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.18'
     //shimmer text
     compile 'com.romainpiel.shimmer:library:1.4.0@aar'
+    //Guava
+    compile 'com.google.guava:guava:22.0-android'
+    //RxPermissions
+    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
 
 }
