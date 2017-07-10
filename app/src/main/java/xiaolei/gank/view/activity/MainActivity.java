@@ -14,7 +14,6 @@ import java.util.List;
 import xiaolei.gank.R;
 import xiaolei.gank.base.BaseActivity;
 import xiaolei.gank.databinding.ActivityMainBinding;
-import xiaolei.gank.view.fragment.NewsFragment;
 import xiaolei.gank.vm.MainViewModel;
 
 /**
@@ -47,7 +46,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         mFragments = new ArrayList<>();
 
         for (int i = 0; i < mVm.titles.length; i++) {
-            mFragments.add(NewsFragment.getInstance(mVm.types[i]));
+//            mFragments.add(NewsFragment.getInstance(mVm.types[i]));
         }
         mBinding.vpMain.setAdapter(new MainFragmentAdapter(getSupportFragmentManager(), mFragments));
         mBinding.tabMain.setTabMode(TabLayout.MODE_SCROLLABLE);
