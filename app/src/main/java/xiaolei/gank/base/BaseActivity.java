@@ -30,4 +30,12 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends RxAppCompa
         init();
     }
 
+    public abstract void showLoading();
+
+    public abstract void showContent();
+
+    public abstract void showError();
+
+    public abstract void showEmpty();
+
 }

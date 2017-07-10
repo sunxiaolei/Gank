@@ -46,4 +46,12 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends RxFragment
         }
     }
 
+    public abstract void showLoading();
+
+    public abstract void showContent();
+
+    public abstract void showError();
+
+    public abstract void showEmpty();
+
 }

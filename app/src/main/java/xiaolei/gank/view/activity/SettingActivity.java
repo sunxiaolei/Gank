@@ -18,6 +18,25 @@ public class SettingActivity extends BaseSwipeActivity<ActivitySettingBinding> {
 
     @Override
     protected void init() {
-        mBinding.toolbar.setTitle(new TitleEntity("设置"));
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showContent() {
+
+    }
+
+    @Override
+    public void showError() {
+
+    }
+
+    @Override
+    public void showEmpty() {
+
     }
 }

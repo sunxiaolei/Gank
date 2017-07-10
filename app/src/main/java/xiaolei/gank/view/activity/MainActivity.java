@@ -14,6 +14,7 @@ import java.util.List;
 import xiaolei.gank.R;
 import xiaolei.gank.base.BaseActivity;
 import xiaolei.gank.databinding.ActivityMainBinding;
+import xiaolei.gank.view.fragment.TestFragment;
 import xiaolei.gank.vm.MainViewModel;
 
 /**
@@ -41,16 +42,36 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
                 .subscribe(o -> {
                     startActivity(new Intent(this, SettingActivity.class));
                 });
-        mVm = new MainViewModel();
+        mVm = new MainViewModel(this);
         mBinding.setVm(mVm);
         mFragments = new ArrayList<>();
-
-        for (int i = 0; i < mVm.titles.length; i++) {
-//            mFragments.add(NewsFragment.getInstance(mVm.types[i]));
+        for (int i = 0; i < 5; i++) {
+            mFragments.add(new TestFragment());
         }
+
         mBinding.vpMain.setAdapter(new MainFragmentAdapter(getSupportFragmentManager(), mFragments));
         mBinding.tabMain.setTabMode(TabLayout.MODE_SCROLLABLE);
         mBinding.tabMain.setupWithViewPager(mBinding.vpMain);
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showContent() {
+
+    }
+
+    @Override
+    public void showError() {
+
+    }
+
+    @Override
+    public void showEmpty() {
+
     }
 
     class MainFragmentAdapter extends FragmentStatePagerAdapter {
@@ -74,7 +95,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return mVm.titles[position];
+            return "==" + position + "==";
         }
     }
 }

@@ -21,8 +21,6 @@ import xiaolei.gank.R;
 
 public class StatusLayout extends FrameLayout {
 
-    public enum STATUS {NORMAL, ERROR, EMPTY, LOADING}
-
     private TextView tvError;
     private ShimmerTextView stvLoading;
 
@@ -50,55 +48,36 @@ public class StatusLayout extends FrameLayout {
         addView(tvError);
     }
 
-    public void setStatus(STATUS status, String msg) {
-        hideViews();
-        switch (status) {
-            case EMPTY:
-                break;
-            case ERROR:
-                showError(msg);
-                break;
-            case LOADING:
-                showLoading();
-                break;
-            case NORMAL:
-                showNormal();
-                break;
-        }
-    }
-
-
-    public void setStatus(STATUS status) {
-        setStatus(status, "");
-    }
-
-    private void hideViews() {
+    public void hideViews() {
         shimmer.cancel();
         for (int i = 0; i < getChildCount(); i++) {
             getChildAt(i).setVisibility(View.GONE);
         }
     }
 
-    private void showError(String msg) {
+    public void showError(String msg) {
+        hideViews();
         tvError.setVisibility(View.VISIBLE);
         tvError.setText(msg);
     }
 
-    private void showLoading() {
+    public void showLoading() {
+        hideViews();
         stvLoading.setVisibility(View.VISIBLE);
         shimmer.start(stvLoading);
     }
 
-    private void showNormal() {
+    public void showContent() {
+        hideViews();
         for (int i = 0; i < getChildCount(); i++) {
-            if (isNormalView(getChildAt(i))) {
+            if (isContentView(getChildAt(i))) {
                 getChildAt(i).setVisibility(View.VISIBLE);
                 continue;
             }
         }
     }
 
-    private boolean isNormalView(View view) {
+    private boolean isContentView(View view) {
         if ((view != null && view != tvError
                 && view != stvLoading)) {
             return true;
