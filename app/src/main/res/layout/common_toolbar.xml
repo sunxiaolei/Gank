@@ -6,7 +6,7 @@
 
         <variable
             name="title"
-            type="xiaolei.todayheadline.model.TitleEntity"/>
+            type="xiaolei.gank.model.TitleEntity"/>
     </data>
 
     <merge

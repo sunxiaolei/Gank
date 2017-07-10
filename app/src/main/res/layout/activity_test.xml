@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="xiaolei.todayheadline.vm.TestViewModel" />
+            type="xiaolei.gank.vm.TestViewModel" />
     </data>
 
     <LinearLayout

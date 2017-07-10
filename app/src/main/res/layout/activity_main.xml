@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="xiaolei.todayheadline.vm.MainViewModel"/>
+            type="xiaolei.gank.vm.MainViewModel"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout

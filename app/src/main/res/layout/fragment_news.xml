@@ -5,10 +5,10 @@
 
         <variable
             name="vm"
-            type="xiaolei.todayheadline.vm.NewsViewModel"/>
+            type="xiaolei.gank.vm.NewsViewModel"/>
     </data>
 
-    <xiaolei.todayheadline.widget.StatusLayout
+    <xiaolei.gank.widget.StatusLayout
         android:id="@+id/layout_status"
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
@@ -30,5 +30,5 @@
 
             </android.support.v4.widget.SwipeRefreshLayout>
         </LinearLayout>
-    </xiaolei.todayheadline.widget.StatusLayout>
+    </xiaolei.gank.widget.StatusLayout>
 </layout>
