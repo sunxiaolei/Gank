@@ -14,6 +14,7 @@ import java.util.List;
 import xiaolei.gank.R;
 import xiaolei.gank.base.BaseActivity;
 import xiaolei.gank.databinding.ActivityMainBinding;
+import xiaolei.gank.view.fragment.DataListFragment;
 import xiaolei.gank.view.fragment.TestFragment;
 import xiaolei.gank.vm.MainViewModel;
 
@@ -45,8 +46,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         mVm = new MainViewModel(this);
         mBinding.setVm(mVm);
         mFragments = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            mFragments.add(new TestFragment());
+        for (int i = 0; i < mVm.categories.length; i++) {
+            mFragments.add(DataListFragment.newInstance(mVm.categories[i]));
         }
 
         mBinding.vpMain.setAdapter(new MainFragmentAdapter(getSupportFragmentManager(), mFragments));
@@ -65,7 +66,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     }
 
     @Override
-    public void showError() {
+    public void showError(String msg) {
 
     }
 
@@ -95,7 +96,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return "==" + position + "==";
+            return mVm.categories[position];
         }
     }
 }

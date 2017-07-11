@@ -31,12 +31,11 @@ public class TestFragment extends BaseFragment<FragmentTestBinding> {
     @Override
     public void showContent() {
         mBinding.layoutStatus.showContent();
-        mBinding.tvTest.setText("This is content");
     }
 
     @Override
-    public void showError() {
-        mBinding.layoutStatus.showError("error message");
+    public void showError(String msg) {
+        mBinding.layoutStatus.showError(msg);
     }
 
     @Override

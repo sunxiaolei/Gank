@@ -14,4 +14,6 @@ public class MainViewModel extends BaseActivityViewModel {
         super(activity);
     }
 
+    public String[] categories = {"Android", "iOS", "前端", "拓展资源", "休息视频"};
+
 }

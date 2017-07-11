@@ -50,7 +50,7 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends RxFragment
 
     public abstract void showContent();
 
-    public abstract void showError();
+    public abstract void showError(String msg);
 
     public abstract void showEmpty();
 

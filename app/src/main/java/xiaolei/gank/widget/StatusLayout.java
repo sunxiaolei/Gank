@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -25,6 +26,8 @@ public class StatusLayout extends FrameLayout {
     private ShimmerTextView stvLoading;
 
     private Shimmer shimmer;
+
+    private boolean isContentShowing = false;
 
     public StatusLayout(@NonNull Context context) {
         super(context);
@@ -51,8 +54,12 @@ public class StatusLayout extends FrameLayout {
     public void hideViews() {
         shimmer.cancel();
         for (int i = 0; i < getChildCount(); i++) {
+            if (getChildAt(i) instanceof SwipeRefreshLayout) {
+                ((SwipeRefreshLayout) getChildAt(i)).setRefreshing(false);
+            }
             getChildAt(i).setVisibility(View.GONE);
         }
+        isContentShowing = false;
     }
 
     public void showError(String msg) {
@@ -62,16 +69,31 @@ public class StatusLayout extends FrameLayout {
     }
 
     public void showLoading() {
-        hideViews();
-        stvLoading.setVisibility(View.VISIBLE);
-        shimmer.start(stvLoading);
+        boolean show = true;
+        shimmer.cancel();
+        for (int i = 0; i < getChildCount(); i++) {
+            if (getChildAt(i) instanceof SwipeRefreshLayout) {
+                show = false;
+            }
+            getChildAt(i).setVisibility(View.GONE);
+        }
+        if (show) {
+            stvLoading.setVisibility(View.VISIBLE);
+            shimmer.start(stvLoading);
+        }
     }
 
     public void showContent() {
-        hideViews();
+        if (!isContentShowing) {
+            hideViews();
+        }
         for (int i = 0; i < getChildCount(); i++) {
             if (isContentView(getChildAt(i))) {
+                if (getChildAt(i) instanceof SwipeRefreshLayout) {
+                    ((SwipeRefreshLayout) getChildAt(i)).setRefreshing(false);
+                }
                 getChildAt(i).setVisibility(View.VISIBLE);
+                isContentShowing = true;
                 continue;
             }
         }

@@ -34,7 +34,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends RxAppCompa
 
     public abstract void showContent();
 
-    public abstract void showError();
+    public abstract void showError(String msg);
 
     public abstract void showEmpty();
 

@@ -31,7 +31,7 @@ public class SettingActivity extends BaseSwipeActivity<ActivitySettingBinding> {
     }
 
     @Override
-    public void showError() {
+    public void showError(String msg) {
 
     }
 

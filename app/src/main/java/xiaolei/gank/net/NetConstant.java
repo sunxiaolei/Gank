@@ -6,5 +6,5 @@ package xiaolei.gank.net;
 
 public class NetConstant {
 
-    public static final String TOUTIAO_BASE_HOST = "http://toutiao.com/api/";
+    public static final String GANK_BASE_HOST = "http://gank.io/api/";
 }
