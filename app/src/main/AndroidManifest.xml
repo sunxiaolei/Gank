@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name="xiaolei.gank.view.activity.SettingActivity"/>
+        <activity android:name=".view.activity.DataActivity"/>
     </application>
 
 </manifest>

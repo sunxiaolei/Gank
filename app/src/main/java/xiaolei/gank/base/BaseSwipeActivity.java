@@ -21,7 +21,7 @@ import xiaolei.gank.R;
  * Created by sunxl8 on 2017/6/23.
  */
 
-public abstract class BaseSwipeActivity<T extends ViewDataBinding> extends BaseActivity implements SwipeBackActivityBase {
+public abstract class BaseSwipeActivity<T extends ViewDataBinding> extends RxAppCompatActivity implements SwipeBackActivityBase {
 
     private SwipeBackActivityHelper mHelper;
 
@@ -81,4 +81,12 @@ public abstract class BaseSwipeActivity<T extends ViewDataBinding> extends BaseA
         Utils.convertActivityToTranslucent(this);
         getSwipeBackLayout().scrollToFinishActivity();
     }
+
+    public abstract void showLoading();
+
+    public abstract void showContent();
+
+    public abstract void showError(String msg);
+
+    public abstract void showEmpty();
 }

@@ -1,6 +1,6 @@
 package xiaolei.gank.base;
 
-import android.databinding.ViewDataBinding;
+import android.support.v7.app.AppCompatActivity;
 
 /**
  * Created by sunxl8 on 2017/7/10.
@@ -8,9 +8,9 @@ import android.databinding.ViewDataBinding;
 
 public abstract class BaseActivityViewModel {
 
-    protected BaseActivity mActivity;
+    protected AppCompatActivity mActivity;
 
-    public BaseActivityViewModel(BaseActivity activity) {
+    public BaseActivityViewModel(AppCompatActivity activity) {
         mActivity = activity;
     }
 }

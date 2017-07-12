@@ -73,7 +73,9 @@ public class StatusLayout extends FrameLayout {
         shimmer.cancel();
         for (int i = 0; i < getChildCount(); i++) {
             if (getChildAt(i) instanceof SwipeRefreshLayout) {
-                show = false;
+                if (((SwipeRefreshLayout) getChildAt(i)).isRefreshing()) {
+                    show = false;
+                }
             }
             getChildAt(i).setVisibility(View.GONE);
         }

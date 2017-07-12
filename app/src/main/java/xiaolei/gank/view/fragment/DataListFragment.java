@@ -8,6 +8,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import xiaolei.gank.R;
 import xiaolei.gank.base.BaseFragment;
 import xiaolei.gank.databinding.FragmentDatalistBinding;
+import xiaolei.gank.model.GankItemEntity;
+import xiaolei.gank.view.activity.DataActivity;
 import xiaolei.gank.view.adapter.DataAdapter;
 import xiaolei.gank.vm.DataListViewModel;
 
@@ -49,6 +51,8 @@ public class DataListFragment extends BaseFragment<FragmentDatalistBinding> {
         mBinding.layoutRefresh.setOnRefreshListener(() -> vm.getData(true, category));
         mAdapter.setOnLoadMoreListener(() -> vm.getData(false, category));
 
+        mAdapter.setOnItemClickListener((adapter, view, i) ->
+                DataActivity.startActivity(getActivity(), (GankItemEntity) adapter.getItem(i)));
 
         vm.getData(true, category);
     }

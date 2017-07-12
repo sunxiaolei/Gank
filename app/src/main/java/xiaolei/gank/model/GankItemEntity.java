@@ -1,12 +1,13 @@
 package xiaolei.gank.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by sunxl8 on 2017/7/11.
  */
 
-public class GankItemEntity {
+public class GankItemEntity implements Serializable {
 
     /**
      * _id : 59618134421aa90c9203d34f
