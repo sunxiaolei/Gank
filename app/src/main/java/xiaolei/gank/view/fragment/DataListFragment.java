@@ -2,6 +2,7 @@ package xiaolei.gank.view.fragment;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
@@ -70,7 +71,7 @@ public class DataListFragment extends BaseFragment<FragmentDatalistBinding> {
 
     @Override
     public void showError(String msg) {
-        mBinding.layoutStatus.showError(msg);
+        mBinding.layoutStatus.showError(msg, v -> vm.getData(true, category));
     }
 
     @Override

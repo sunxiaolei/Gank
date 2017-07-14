@@ -5,9 +5,12 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -22,7 +25,9 @@ import xiaolei.gank.R;
 
 public class StatusLayout extends FrameLayout {
 
-    private TextView tvError;
+    private View viewError;
+    private TextView tvErrorMsg;
+    private AppCompatButton btnErrorRetry;
     private ShimmerTextView stvLoading;
 
     private Shimmer shimmer;
@@ -35,9 +40,9 @@ public class StatusLayout extends FrameLayout {
 
     public StatusLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        tvError = new TextView(getContext());
-        tvError.setText("ERROR!!!");
-        tvError.setGravity(Gravity.CENTER);
+        viewError = LayoutInflater.from(context).inflate(R.layout.view_error, null);
+        tvErrorMsg = (TextView) viewError.findViewById(R.id.tv_error_msg);
+        btnErrorRetry = (AppCompatButton) viewError.findViewById(R.id.btn_error_retry);
         shimmer = new Shimmer();
         shimmer.setDuration(2000)
                 .setDirection(Shimmer.ANIMATION_DIRECTION_RTL);
@@ -48,7 +53,7 @@ public class StatusLayout extends FrameLayout {
         stvLoading.setTextSize(20);
         stvLoading.setGravity(Gravity.CENTER);
         addView(stvLoading);
-        addView(tvError);
+        addView(viewError);
     }
 
     public void hideViews() {
@@ -62,10 +67,11 @@ public class StatusLayout extends FrameLayout {
         isContentShowing = false;
     }
 
-    public void showError(String msg) {
+    public void showError(String msg, OnClickListener listener) {
         hideViews();
-        tvError.setVisibility(View.VISIBLE);
-        tvError.setText(msg);
+        viewError.setVisibility(View.VISIBLE);
+        tvErrorMsg.setText(msg);
+        btnErrorRetry.setOnClickListener(listener);
     }
 
     public void showLoading() {
@@ -102,7 +108,7 @@ public class StatusLayout extends FrameLayout {
     }
 
     private boolean isContentView(View view) {
-        if ((view != null && view != tvError
+        if ((view != null && view != viewError
                 && view != stvLoading)) {
             return true;
         }

@@ -1,5 +1,7 @@
 package xiaolei.gank.view.fragment;
 
+import android.view.View;
+
 import xiaolei.gank.R;
 import xiaolei.gank.base.BaseFragment;
 import xiaolei.gank.databinding.FragmentTestBinding;
@@ -35,7 +37,12 @@ public class TestFragment extends BaseFragment<FragmentTestBinding> {
 
     @Override
     public void showError(String msg) {
-        mBinding.layoutStatus.showError(msg);
+        mBinding.layoutStatus.showError(msg, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
