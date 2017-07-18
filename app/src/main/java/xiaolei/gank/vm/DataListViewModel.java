@@ -2,6 +2,7 @@ package xiaolei.gank.vm;
 
 import xiaolei.gank.base.BaseFragment;
 import xiaolei.gank.base.BaseFragmentViewModel;
+import xiaolei.gank.net.ErrorHanding;
 import xiaolei.gank.net.GankRequest;
 import xiaolei.gank.view.adapter.DataAdapter;
 
@@ -36,7 +37,7 @@ public class DataListViewModel extends BaseFragmentViewModel {
                     page++;
                 }, throwable -> {
                     if (isRefresh) {
-                        mFragment.showError(throwable.getMessage());
+                        mFragment.showError(ErrorHanding.handleError(throwable));
                     } else {
                         mAdapter.loadMoreFail();
                     }

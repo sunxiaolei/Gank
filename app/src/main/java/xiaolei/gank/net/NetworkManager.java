@@ -1,5 +1,6 @@
 package xiaolei.gank.net;
 
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.orhanobut.logger.Logger;
 
 import java.util.Locale;
@@ -62,7 +63,8 @@ public class NetworkManager {
                 .connectTimeout(HTTP_CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
                 .writeTimeout(HTTP_WRITE_TIMEOUT, TimeUnit.MILLISECONDS)
                 .readTimeout(HTTP_READ_TIMEOUT, TimeUnit.MILLISECONDS)
-                .addInterceptor(interceptor);
+                .addInterceptor(interceptor)
+                .addNetworkInterceptor(new StethoInterceptor());
 
         return builder.build();
     }

@@ -3,6 +3,7 @@ package xiaolei.gank.base;
 import android.app.Application;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.stetho.Stetho;
 
 import org.litepal.LitePal;
 
@@ -23,5 +24,7 @@ public class BaseApplication extends Application {
         LitePal.initialize(this);
 
         Fresco.initialize(this);
+
+        Stetho.initializeWithDefaults(this);
     }
 }
