@@ -5,15 +5,22 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.view.KeyEvent;
+import android.widget.Toast;
 
 import com.jakewharton.rxbinding2.view.RxView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Flowable;
+import io.reactivex.functions.Consumer;
+import sunxl8.myutils.ToastUtils;
 import xiaolei.gank.R;
 import xiaolei.gank.base.BaseActivity;
 import xiaolei.gank.databinding.ActivityMainBinding;
+import xiaolei.gank.net.SchedulersCompat;
 import xiaolei.gank.view.fragment.DataListFragment;
 import xiaolei.gank.view.fragment.TestFragment;
 import xiaolei.gank.vm.MainViewModel;
@@ -98,5 +105,24 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         public CharSequence getPageTitle(int position) {
             return mVm.categories[position];
         }
+    }
+
+    private boolean exitApp = false;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if (exitApp) {
+                finish();
+            } else {
+                ToastUtils.shortShow("再按一次退出应用程序");
+                exitApp = true;
+                Flowable.timer(2000, TimeUnit.MILLISECONDS)
+                        .compose(SchedulersCompat.applyIoSchedulers())
+                        .subscribe(aLong -> exitApp = false);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
