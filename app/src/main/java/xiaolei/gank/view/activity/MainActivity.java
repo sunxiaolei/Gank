@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.widget.Toast;
 
 import com.jakewharton.rxbinding2.view.RxView;
+import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,10 @@ import sunxl8.myutils.ToastUtils;
 import xiaolei.gank.R;
 import xiaolei.gank.base.BaseActivity;
 import xiaolei.gank.databinding.ActivityMainBinding;
+import xiaolei.gank.events.KeyDownEvent;
+import xiaolei.gank.events.ListStatusEvent;
 import xiaolei.gank.net.SchedulersCompat;
+import xiaolei.gank.utils.RxBus;
 import xiaolei.gank.view.fragment.DataListFragment;
 import xiaolei.gank.view.fragment.TestFragment;
 import xiaolei.gank.vm.MainViewModel;
@@ -35,6 +39,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     private MainViewModel mVm;
     private List<Fragment> mFragments;
+
+    private int mListStatus;
 
     @Override
     protected int setContentViewId() {
@@ -60,6 +66,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         mBinding.vpMain.setAdapter(new MainFragmentAdapter(getSupportFragmentManager(), mFragments));
         mBinding.tabMain.setTabMode(TabLayout.MODE_SCROLLABLE);
         mBinding.tabMain.setupWithViewPager(mBinding.vpMain);
+
+        RxBus.getDefault().toFlowable(ListStatusEvent.class)
+                .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
+                .subscribe(event -> mListStatus = event.getStatus());
     }
 
     @Override
@@ -112,14 +122,18 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
-            if (exitApp) {
-                finish();
+            if (mListStatus == ListStatusEvent.TOP) {
+                if (exitApp) {
+                    finish();
+                } else {
+                    ToastUtils.shortShow("再按一次退出应用程序");
+                    exitApp = true;
+                    Flowable.timer(2000, TimeUnit.MILLISECONDS)
+                            .compose(SchedulersCompat.applyIoSchedulers())
+                            .subscribe(aLong -> exitApp = false);
+                }
             } else {
-                ToastUtils.shortShow("再按一次退出应用程序");
-                exitApp = true;
-                Flowable.timer(2000, TimeUnit.MILLISECONDS)
-                        .compose(SchedulersCompat.applyIoSchedulers())
-                        .subscribe(aLong -> exitApp = false);
+                RxBus.getDefault().post(new KeyDownEvent(KeyDownEvent.KEYCODE_BACK));
             }
             return true;
         }
