@@ -7,6 +7,7 @@ import android.support.multidex.MultiDex;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
+import com.tencent.smtt.sdk.QbSdk;
 
 import org.litepal.LitePal;
 
@@ -31,6 +32,16 @@ public class BaseApplication extends Application {
         Fresco.initialize(this);
 
         Stetho.initializeWithDefaults(this);
+
+        QbSdk.initX5Environment(getApplicationContext(), new QbSdk.PreInitCallback() {
+            @Override
+            public void onCoreInitFinished() {
+            }
+
+            @Override
+            public void onViewInitFinished(boolean b) {
+            }
+        });
     }
 
     @Override
