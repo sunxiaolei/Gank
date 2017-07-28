@@ -2,14 +2,14 @@
 <resources>
     <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#000000</color>
 
     <color name="white">#FFFFFF</color>
 
 
     <color name="bg">#EEEEEE</color>
 
-    <color name="colorBtnSelector">#333333</color>
+    <color name="colorBtnSelector">#444444</color>
 
 
     <color name="colorTextGray">#969fb1</color>

@@ -4,13 +4,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
 
+import com.jakewharton.rxbinding2.view.RxView;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
+import com.trello.rxlifecycle2.android.ActivityEvent;
 
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Flowable;
+import io.reactivex.functions.Consumer;
 import sunxl8.myutils.NetworkUtils;
+import sunxl8.myutils.ToastUtils;
 import xiaolei.gank.R;
 import xiaolei.gank.base.BaseSwipeActivity;
 import xiaolei.gank.databinding.ActivityDataBinding;
@@ -86,6 +95,15 @@ public class DataActivity extends BaseSwipeActivity<ActivityDataBinding> {
 
             }
         });
+
+        mBinding.web.setRefreshLayout(mBinding.layoutRefresh);
+
+        RxView.clicks(mBinding.btnShare)
+                .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
+                .subscribe(o -> {
+                    ToastUtils.shortShow("Share");
+                });
+
     }
 
     @Override

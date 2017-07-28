@@ -3,4 +3,6 @@
 
     <item android:drawable="@color/colorBtnSelector" android:state_pressed="true"/>
 
+    <item android:drawable="@color/colorAccent"/>
+
 </selector>
